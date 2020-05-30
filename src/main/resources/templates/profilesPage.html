@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link href="../static/styles/home.css" data-th-href="@{/styles/home.css}" rel="stylesheet" />
+    <style>
+
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron ">
+        <div class="container row">
+            <div class="col-sm logo">
+                <img  src="..static/img/logo.png" data-th-src="@{img/logo.png}"  style="width:100%"/>
+            </div>
+            <div class="col-sm">
+                <div class="container menu-tab">
+                    <ul class="nav nav-pills navbar-default ">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/profilesPage">Find Friends</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Create Post</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="container">
+        <div class="container mt-4" data-th-each="userProfile: ${userProfilesHome}">
+
+            <div class="card col-sm profile-card" style="width:800px;height:215px;">
+                <div class="card-body row">
+                    <div class="col-sm-4">
+                        <img class="card-img-top" src="..static/img/img_avatar1.jpg"
+                             data-th-src="@{img/img_avatar1.jpg}" alt="Card image" style="width:100%"/>
+
+                    </div>
+                    <div class="col-sm-8">
+                        <h4 class="card-title " data-th-text="${userProfile.fullName}"></h4>
+                        <p class="card-title font-weight-light " data-th-text="${userProfile.gender}"></p>
+                        <p class="card-text" data-th-text="${userProfile.about}"></p>
+                        <a href="#" class="btn btn-primary stretched-link">See Profile</a>
+                    </div>
+
+                </div>
+                <div class="col-sm"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

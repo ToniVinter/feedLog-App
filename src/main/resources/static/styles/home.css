@@ -1,0 +1,128 @@
+.card-body img.card-img-top {
+  border: 1px solid #ddd !important;
+  border-radius: 4px !important;
+  padding: 5px;
+  width: 200px !important;
+}
+
+body {
+    background: #edf1f5;
+}
+
+.btn{
+    border-radius:1rem;
+    border-color:#089ea9;
+    background-color: #089ea9;
+}
+
+.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #089ea9;
+    border-color: #089ea9;
+}
+
+.btn:hover{
+ background-color:#089ea9;
+ border-color:#089ea9;
+}
+
+.nav-pills .nav-link {
+    border-radius: 1rem;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff;
+    background-color: #089ea9;
+}
+
+a {
+    color: #089ea9;
+}
+a:hover{
+    color: #7cd4db;
+}
+a.nav-link {
+    font-weight: 500;
+}
+a.btn.btn-primary.stretched-link {
+    font-weight: 500;
+}
+
+.jumbotron {
+    padding: 2rem 2rem;
+    max-height: 100px;
+    margin-top: 30px;
+    border-radius: 1rem ;
+    background-color: white;
+    box-shadow: 0 10px 50px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.jumbotron img {
+    width: 300px !important;
+    display: block;
+    margin-left: -25px;
+    margin-top: -25px;
+
+}
+
+.card-body.row {
+    box-shadow: 0 10px 100px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.card{
+    border: 1px solid white;
+}
+
+.container.menu-tab {
+    display: flex;
+    justify-content: flex-end;
+    margin-left: 70px;
+}
+
+.card.col-sm.profile-card {
+    margin: auto;
+    width:110%;
+    transition: transform .5s;
+}
+
+.card.col-sm.profile-card:hover {
+    margin: auto;
+    transform:scale(1.05);
+}
+
+.profile-pic-min{
+    border-radius: 180px;
+}
+.container.like-btn.mt-3 {
+    border-top: solid #dee2e6 0.05px;
+}
+.btn-outline-secondary {
+     color: white;
+}
+    .login-form {
+		width: 340px;
+    	margin: 50px auto;
+	}
+    .login-form form {
+    	margin-bottom: 15px;
+        background: white;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        padding: 30px;
+        border-radius: 20px;
+    }
+    .login-form h2 {
+        margin: 0 0 15px;
+    }
+    .form-control, .btn {
+        min-height: 38px;
+        border-radius: 2px;
+    }
+    .btn {
+        font-size: 15px;
+        font-weight: bold;
+    }
+    input.form-control {
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+}
+

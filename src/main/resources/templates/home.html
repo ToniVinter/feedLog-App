@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+>
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link href="../static/styles/home.css" data-th-href="@{/styles/home.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <style>
+
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron ">
+        <div class="container row">
+            <div class="col-sm logo">
+                <img src="..static/img/logo.png" data-th-src="@{img/logo.png}" style="width:100%"/>
+            </div>
+            <div class="col-sm">
+                <div class="container menu-tab">
+                    <ul class="nav nav-pills navbar-default ">
+                        <li class="nav-item">
+                            <a class="nav-link active " href="/home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="/profilesPage">Find Friends</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Create Post</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="container">
+        <div class="container mt-4" data-th-each="post: ${posts}">
+
+            <div class="card col-sm profile-card">
+                <div class="card-body row">
+                    <div class="col-sm-8 row">
+                        <div class="col-sm-3">
+                            <img class=" profile-pic-min" src="..static/img/img_avatar1.jpg"
+                                 data-th-src="@{img/img_avatar1.jpg}" alt="Card image" style="width:80%"/>
+                        </div>
+                        <div class="col-sm-9">
+                            <h4 class="card-title">Fix bug</h4>
+                            <p class="card-title font-weight-light " data-th-text="${post.timestamp}"></p>
+
+                        </div>
+
+                    </div>
+                    <div class="col-sm-4">
+                    </div>
+                    <div class="container mt-4">
+                        <h6 class="card-title " data-th-text="${post.title}"></h6>
+                        <p class="card-text" data-th-text="${post.content}"></p>
+                    </div>
+                    <div class="col-sm"></div>
+                    <div class="container like-btn mt-3">
+                        <div class="row">
+
+                            <div class="col-sm-12 input-group mt-3">
+                                <input type="text" class="form-control" placeholder="Add a comment" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
