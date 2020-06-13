@@ -25,8 +25,7 @@ public class UserProfileService {
     }
 
 
-    public UserProfile addUserProfile(User user, UserProfile profile){
-        profile.setUser(user);
+    public UserProfile addUserProfile(UserProfile profile){
        return repository.save(profile);
     }
 }

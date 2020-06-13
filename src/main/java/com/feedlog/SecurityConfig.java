@@ -63,9 +63,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/home", false)
                 .permitAll()
                 .and()
+                .headers()
+                .frameOptions()
+                .disable()
+                .and()
                 .csrf()
                 .disable();
-    }
+
+
+          }
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {

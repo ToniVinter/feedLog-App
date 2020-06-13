@@ -22,7 +22,7 @@
     <div class="jumbotron ">
         <div class="container row">
             <div class="col-sm logo">
-                <img src="..static/img/logo.png" data-th-src="@{img/logo.png}" style="width:100%"/>
+                <img src="/img/logo.png" data-th-src="@{/img/logo.png}" style="width:100%"/>
             </div>
             <div class="col-sm">
                 <div class="container menu-tab">
@@ -46,61 +46,27 @@
     </div>
     <div class="container">
         <div class="container mt-4">
-            <button class="btn btn-primary mb-4" type="button" data-toggle="collapse" data-target="#createPost"
-                    aria-expanded="false" aria-controls="createPost">
-                Create Post
-            </button>
-
-            <div class="collapse" id="createPost">
-                <div class="card card-body">
-                    <form data-th-action="@{/home}" data-th-object="${createPost}" method="POST">
-                        <h2>Share your memories</h2>
-                        <div class=" mt-4 form-group">
-                            <label><h6>Title</h6></label>
-                            <input class="form-control" placeholder="Title" type="text" data-th-field="*{title}"/>
-                            <label class="mt-4"><h6>Content</h6></label>
-                            <input class="form-control" placeholder="Write post..." type="text"
-                                   data-th-field="*{content}"/>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-        </div>
-        <div class="container mt-4" data-th-each="post: ${posts}">
 
             <div class="card col-sm profile-card">
                 <div class="card-body row">
                     <div class="col-sm-8 row">
                         <div class="col-sm-3">
-                            <img class=" profile-pic-min" src="/img/img_avatar1.jpg"
+                            <img class="profile-pic-min" src="/img/img_avatar1.jpg"
                                  data-th-src="@{/img/img_avatar1.jpg}" alt="Card image" style="width:80%"/>
                         </div>
                         <div class="col-sm-9">
-                            <h4 class="card-title"></h4>
-                            <p class="card-title font-weight-light " data-th-text="${post.timestamp}"></p>
+                            <h4 class="card-title" data-th-text="${userProfile.fullName}"></h4>
+                            <p class="card-title font-weight-light " ></p>
 
                         </div>
 
                     </div>
                     <div class="col-sm-4">
                     </div>
-                    <div class="container mt-4">
-                        <h6 class="card-title " data-th-text="${post.title}"></h6>
-<!--                        <h6 class="card-title " data-th-text="${post.userProfile.fullName}"></h6>-->
-                        <p class="card-text" data-th-text="${post.content}"></p>
-                    </div>
+
                     <div class="col-sm"></div>
                     <div class="container like-btn mt-3">
                         <div class="row">
-
-                            <div class="col-sm-12 input-group mt-3">
-                                <input type="text" class="form-control" placeholder="Add a comment"
-                                       aria-label="Recipient's username" aria-describedby="basic-addon2">
-                                <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary" type="button">Submit</button>
-                                </div>
-                            </div>
                         </div>
 
                     </div>

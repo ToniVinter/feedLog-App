@@ -4,6 +4,7 @@ import com.feedlog.domain.Post;
 import com.feedlog.domain.User;
 import com.feedlog.domain.UserProfile;
 import com.feedlog.repository.PostRepository;
+import com.feedlog.repository.UserProfileRepository;
 import com.feedlog.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -20,56 +21,57 @@ import java.util.Collection;
 @SpringBootApplication
 public class FeedLogApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(FeedLogApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(FeedLogApplication.class, args);
+    }
 
-	@Bean
-	CommandLineRunner atStartup(UserRepository repo, PostRepository postRepository) {
-		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    @Bean
+    CommandLineRunner atStartup(UserRepository repo, PostRepository postRepository, UserProfileRepository profileRepository) {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-		return args -> {
-			repo.save(new User("Toni", "USER", passwordEncoder.encode("Toni123"), true,
-					new UserProfile("Mc Adken", "13454","Male","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")));
-			repo.save(new User("Smith", "USER", "Smith123", true,
-					new UserProfile("Tom Smith", "1454","Male","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")));
-			repo.save(new User("Williams", "USER", "Williams123", true,
-					new UserProfile("John Williams", "13000","Male","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")));
+        return args -> {
+            User user = new User("Toni", "USER", passwordEncoder.encode("Toni123"), true);
 
-			repo.findAll()
-					.forEach(System.out::println);
+            repo.save(user);
+            repo.save(new User("Smith", "USER", "Smith123", true,
+                    new UserProfile("Tom Smith", "1454", "Male", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")));
+            repo.save(new User("Williams", "USER", "Williams123", true,
+                    new UserProfile("John Williams", "13000", "Male", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")));
 
-			postRepository.save(new Post("Trip in Arizona",
-					"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum molestie nisi lorem, vel pharetra lorem congue sit amet. In hac habitasse platea dictumst. Maecenas vel nulla vel urna molestie lobortis a eu arcu. Ut non efficitur nisi. Nunc porttitor commodo nisi, vel venenatis lacus hendrerit vitae. Mauris est dolor, rutrum id ipsum eget, consectetur euismod risus. Nunc id ultricies velit, at volutpat sem.",
-					new Timestamp(System.currentTimeMillis()),
-					repo.findByUsername("Toni").getUserProfile()
-					));
+            repo.findAll()
+                    .forEach(System.out::println);
 
-			postRepository.save(new Post("Trip in Phoenix",
-					"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum molestie nisi lorem, vel pharetra lorem congue sit amet. In hac habitasse platea dictumst. Maecenas vel nulla vel urna molestie lobortis a eu arcu. Ut non efficitur nisi. Nunc porttitor commodo nisi, vel venenatis lacus hendrerit vitae. Mauris est dolor, rutrum id ipsum eget, consectetur euismod risus. Nunc id ultricies velit, at volutpat sem.",
-					new Timestamp(System.currentTimeMillis()),
-					repo.findByUsername("Smith").getUserProfile()
-			));
+            postRepository.save(new Post("Trip in Arizona",
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum molestie nisi lorem, vel pharetra lorem congue sit amet. In hac habitasse platea dictumst. Maecenas vel nulla vel urna molestie lobortis a eu arcu. Ut non efficitur nisi. Nunc porttitor commodo nisi, vel venenatis lacus hendrerit vitae. Mauris est dolor, rutrum id ipsum eget, consectetur euismod risus. Nunc id ultricies velit, at volutpat sem.",
+                    new Timestamp(System.currentTimeMillis()),
+					profileRepository.findById(1).get()
+            ));
+            System.out.println(profileRepository.findById(1).get());
+            postRepository.save(new Post("Trip in Phoenix",
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum molestie nisi lorem, vel pharetra lorem congue sit amet. In hac habitasse platea dictumst. Maecenas vel nulla vel urna molestie lobortis a eu arcu. Ut non efficitur nisi. Nunc porttitor commodo nisi, vel venenatis lacus hendrerit vitae. Mauris est dolor, rutrum id ipsum eget, consectetur euismod risus. Nunc id ultricies velit, at volutpat sem.",
+                    new Timestamp(System.currentTimeMillis()),
+                    repo.findByUsername("Smith").getUserProfile()
+            ));
 
-			postRepository.save(new Post("Trip in Sedona",
-					"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum molestie nisi lorem, vel pharetra lorem congue sit amet. In hac habitasse platea dictumst. Maecenas vel nulla vel urna molestie lobortis a eu arcu. Ut non efficitur nisi. Nunc porttitor commodo nisi, vel venenatis lacus hendrerit vitae. Mauris est dolor, rutrum id ipsum eget, consectetur euismod risus. Nunc id ultricies velit, at volutpat sem.",
-					new Timestamp(System.currentTimeMillis()),
-					repo.findByUsername("Toni").getUserProfile()
-			));
+            postRepository.save(new Post("Trip in Sedona",
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum molestie nisi lorem, vel pharetra lorem congue sit amet. In hac habitasse platea dictumst. Maecenas vel nulla vel urna molestie lobortis a eu arcu. Ut non efficitur nisi. Nunc porttitor commodo nisi, vel venenatis lacus hendrerit vitae. Mauris est dolor, rutrum id ipsum eget, consectetur euismod risus. Nunc id ultricies velit, at volutpat sem.",
+                    new Timestamp(System.currentTimeMillis()),
+                    repo.findByUsername("Toni").getUserProfile()
+            ));
 
-			postRepository.findAll()
-					.forEach(System.out::println);
-		};
-	}
+            postRepository.findAll()
+                    .forEach(System.out::println);
+        };
+    }
 
-	public static Collection<GrantedAuthority> getAuthorities() {
-		Collection<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
-		GrantedAuthority grantedAuthority = new GrantedAuthority() {
-			public String getAuthority() {
-				return "ROLE_USER";
-			}
-		};
-		grantedAuthorities.add(grantedAuthority);
-		return grantedAuthorities;
-	}
+    public static Collection<GrantedAuthority> getAuthorities() {
+        Collection<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
+        GrantedAuthority grantedAuthority = new GrantedAuthority() {
+            public String getAuthority() {
+                return "ROLE_USER";
+            }
+        };
+        grantedAuthorities.add(grantedAuthority);
+        return grantedAuthorities;
+    }
 }

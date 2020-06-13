@@ -1,6 +1,7 @@
 package com.feedlog.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.util.List;
@@ -25,7 +26,6 @@ public class UserProfile {
 
     @JsonBackReference
     @OneToOne
-    @JoinColumn(name = "user_id")
     private User user;
 
 
@@ -37,6 +37,14 @@ public class UserProfile {
         this.countryCode = countryCode;
         this.gender = gender;
         this.about = about;
+    }
+
+    public UserProfile(String fullName, String countryCode, String gender, String about, User user) {
+        this.fullName = fullName;
+        this.countryCode = countryCode;
+        this.gender = gender;
+        this.about = about;
+        this.user = user;
     }
 
 

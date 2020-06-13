@@ -1,5 +1,6 @@
 package com.feedlog;
 
+import com.feedlog.domain.Post;
 import com.feedlog.domain.User;
 import com.feedlog.domain.UserProfile;
 import com.feedlog.service.PostService;
@@ -7,9 +8,7 @@ import com.feedlog.service.UserProfileService;
 import com.feedlog.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -32,9 +31,11 @@ public class UIController {
     }
 
     @GetMapping("home")
-    public String home(Model homeModel){
+    public String home(Model homeModel, Model post){
+        Post createPost = new Post();
+        post.addAttribute("createPost", createPost);
         homeModel.addAttribute("posts",postService.findAll());
-        homeModel.addAttribute("postForProfiles",profileService.findAll());
+//        homeModel.addAttribute("postForProfiles",postService.findById(id);
         return "home";
     }
     @GetMapping("profilesPage")
@@ -56,5 +57,36 @@ public class UIController {
         userService.addUser(user);
         return "home";
     }
+
+
+    @GetMapping("profilesPage/{userProfileId}")
+    public String showProfilePage(@ModelAttribute UserProfile userProfile, Model model, @PathVariable("userProfileId") Integer profileId){
+        userProfile = profileService.findById(profileId);
+        model.addAttribute("userProfile",userProfile);
+        return "profilePage";
+    }
+
+    @GetMapping("createProfile")
+    public String createProfile(Model profileModel){
+        UserProfile userProfile = new UserProfile();
+        profileModel.addAttribute("userProfile", userProfile);
+        return "createProfile";
+    }
+
+    @PostMapping("createProfile")
+    public String createProfile(@ModelAttribute("userProfile") UserProfile userProfile){
+        profileService.addUserProfile(userProfile);
+        return "home";
+    }
+
+
+    @PostMapping
+    public String createPost(@ModelAttribute("post") Post post){
+        postService.addPost(post);
+        return "home";
+    }
+
+
+
 
 }

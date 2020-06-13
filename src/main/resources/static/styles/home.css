@@ -121,8 +121,15 @@ a.btn.btn-primary.stretched-link {
         font-size: 15px;
         font-weight: bold;
     }
+    .btn-primary.focus, .btn-primary:focus{
+        background-color: #089ea9;
+        border-color: #089ea9;
+        box-shadow: box-shadow: 0 0 0 0.2rem rgba(38,143,255,.5);
+
+    }
     input.form-control {
         border-top-left-radius: 10px;
         border-bottom-left-radius: 10px;
 }
+
 

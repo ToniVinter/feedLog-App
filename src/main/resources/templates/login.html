@@ -17,7 +17,7 @@
 <body>
 <div class="login-form">
     <div class="logo">
-        <img src="..static/img/logo.png" th:src="@{img/logo.png}" style="width:100%"/>
+        <img src="/img/logo.png" th:src="@{/img/logo.png}" style="width:100%"/>
     </div>
     <form data-th-if="@{/login}" th:object="${user}" method="post">
         <h2 class="text-center">Log in</h2>
