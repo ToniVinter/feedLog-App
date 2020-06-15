@@ -12,25 +12,20 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String title;
-    @Column(columnDefinition="TEXT")
+    @Column(columnDefinition = "TEXT")
     private String content;
     private Timestamp timestamp;
 
-
-
-    @ManyToOne(fetch = FetchType.EAGER,
-            cascade =  CascadeType.ALL)
-    @JoinColumn(name="userProfile_id")
+    @ManyToOne(fetch = FetchType.LAZY)
     private UserProfile userProfile;
 
     public Post() {
     }
 
-    public Post(String title, String content, Timestamp timestamp, UserProfile userProfile) {
+    public Post(String title, String content, Timestamp timestamp) {
         this.title = title;
         this.content = content;
         this.timestamp = timestamp;
-        this.userProfile = userProfile;
     }
 
     public String getTitle() {

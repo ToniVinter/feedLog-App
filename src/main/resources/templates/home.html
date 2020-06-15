@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 >
 <head>
-    <title>Bootstrap Example</title>
+    <title>Feed Log</title>
     <meta charset="utf-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -34,7 +34,7 @@
                             <a class="nav-link " href="/profilesPage">Find Friends</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Create Post</a>
+                            <a class="nav-link" href="/createProfile">Create Profile</a>
                         </li>
 
                     </ul>
@@ -61,6 +61,7 @@
                             <label class="mt-4"><h6>Content</h6></label>
                             <input class="form-control" placeholder="Write post..." type="text"
                                    data-th-field="*{content}"/>
+                            <button type="submit" class="btn btn-primary mt-3">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -78,6 +79,7 @@
                         </div>
                         <div class="col-sm-9">
                             <h4 class="card-title"></h4>
+                            <h4 class="card-title " data-th-text="${post.userProfile.fullName}"></h4>
                             <p class="card-title font-weight-light " data-th-text="${post.timestamp}"></p>
 
                         </div>
@@ -87,7 +89,6 @@
                     </div>
                     <div class="container mt-4">
                         <h6 class="card-title " data-th-text="${post.title}"></h6>
-<!--                        <h6 class="card-title " data-th-text="${post.userProfile.fullName}"></h6>-->
                         <p class="card-text" data-th-text="${post.content}"></p>
                     </div>
                     <div class="col-sm"></div>

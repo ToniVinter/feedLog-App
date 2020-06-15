@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,14 +20,14 @@ public class UserProfile {
     private String gender;
     private String about;
 
-    @OneToMany(fetch = FetchType.EAGER,
-            cascade =  CascadeType.ALL,
-            mappedBy = "userProfile")
-    private List<Post> post;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Post> post = new ArrayList<>();
 
     @JsonBackReference
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
 
 
     public UserProfile(){

@@ -28,9 +28,10 @@ public class User {
     }
 
     @JsonManagedReference
-    @OneToOne(fetch = FetchType.EAGER,
+    @OneToOne(fetch = FetchType.LAZY,
             cascade =  CascadeType.ALL,
             mappedBy = "user")
+    @JoinColumn(name = "profile_id", nullable = false)
     private UserProfile userProfile;
 
     public User(String username, String password){

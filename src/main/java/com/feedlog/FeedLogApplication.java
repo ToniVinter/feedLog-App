@@ -30,37 +30,69 @@ public class FeedLogApplication {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
         return args -> {
-            User user = new User("Toni", "USER", passwordEncoder.encode("Toni123"), true);
-
+           User user = new User("Toni", "USER", passwordEncoder.encode("Toni123"), true);
+            UserProfile userProfile =  new UserProfile("John William", "1454", "Male", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+            user.setUserProfile(userProfile);
+            userProfile.setUser(user);
             repo.save(user);
-            repo.save(new User("Smith", "USER", "Smith123", true,
-                    new UserProfile("Tom Smith", "1454", "Male", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")));
-            repo.save(new User("Williams", "USER", "Williams123", true,
-                    new UserProfile("John Williams", "13000", "Male", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")));
 
-            repo.findAll()
-                    .forEach(System.out::println);
+            user = new User("Alex", "USER", passwordEncoder.encode("Alex123"), true);
+            userProfile =  new UserProfile("Alex Smith", "1454", "Male", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+            user.setUserProfile(userProfile);
+            userProfile.setUser(user);
+            repo.save(user);
 
-            postRepository.save(new Post("Trip in Arizona",
+
+//            repo.save(user);
+////            profileRepository.save(userProfile);
+//
+//            repo.save(new User("Smith", "USER", "Smith123", true,
+//                    new UserProfile("Tom Smith", "1454", "Male", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")));
+//            repo.save(new User("Williams", "USER", "Williams123", true,
+//                    new UserProfile("John Williams", "13000", "Male", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")));
+//
+//            repo.findAll()
+//                    .forEach(System.out::println);
+//
+            Post post = new Post("Trip in Arizona",
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum molestie nisi lorem, vel pharetra lorem congue sit amet. In hac habitasse platea dictumst. Maecenas vel nulla vel urna molestie lobortis a eu arcu. Ut non efficitur nisi. Nunc porttitor commodo nisi, vel venenatis lacus hendrerit vitae. Mauris est dolor, rutrum id ipsum eget, consectetur euismod risus. Nunc id ultricies velit, at volutpat sem.",
-                    new Timestamp(System.currentTimeMillis()),
-					profileRepository.findById(1).get()
-            ));
-            System.out.println(profileRepository.findById(1).get());
-            postRepository.save(new Post("Trip in Phoenix",
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum molestie nisi lorem, vel pharetra lorem congue sit amet. In hac habitasse platea dictumst. Maecenas vel nulla vel urna molestie lobortis a eu arcu. Ut non efficitur nisi. Nunc porttitor commodo nisi, vel venenatis lacus hendrerit vitae. Mauris est dolor, rutrum id ipsum eget, consectetur euismod risus. Nunc id ultricies velit, at volutpat sem.",
-                    new Timestamp(System.currentTimeMillis()),
-                    repo.findByUsername("Smith").getUserProfile()
-            ));
+                    new Timestamp(System.currentTimeMillis()));
+            userProfile = profileRepository.findById(1).get();
+            post.setUserProfile(userProfile);
+            postRepository.save(post);
 
-            postRepository.save(new Post("Trip in Sedona",
+             post = new Post("Trip in Bălcescu",
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum molestie nisi lorem, vel pharetra lorem congue sit amet. In hac habitasse platea dictumst. Maecenas vel nulla vel urna molestie lobortis a eu arcu. Ut non efficitur nisi. Nunc porttitor commodo nisi, vel venenatis lacus hendrerit vitae. Mauris est dolor, rutrum id ipsum eget, consectetur euismod risus. Nunc id ultricies velit, at volutpat sem.",
-                    new Timestamp(System.currentTimeMillis()),
-                    repo.findByUsername("Toni").getUserProfile()
-            ));
+                    new Timestamp(System.currentTimeMillis()));
+            userProfile = profileRepository.findById(2).get();
+            post.setUserProfile(userProfile);
+            postRepository.save(post);
 
-            postRepository.findAll()
-                    .forEach(System.out::println);
+            post = new Post("Trip in Paris",
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum molestie nisi lorem, vel pharetra lorem congue sit amet. In hac habitasse platea dictumst. Maecenas vel nulla vel urna molestie lobortis a eu arcu. Ut non efficitur nisi. Nunc porttitor commodo nisi, vel venenatis lacus hendrerit vitae. Mauris est dolor, rutrum id ipsum eget, consectetur euismod risus. Nunc id ultricies velit, at volutpat sem.",
+                    new Timestamp(System.currentTimeMillis()));
+            userProfile = profileRepository.findById(1).get();
+            post.setUserProfile(userProfile);
+            postRepository.save(post);
+
+
+
+//
+//            System.out.println("TTTT" +     profileRepository.findById(1).get());
+//            postRepository.save(new Post("Trip in Phoenix",
+//                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum molestie nisi lorem, vel pharetra lorem congue sit amet. In hac habitasse platea dictumst. Maecenas vel nulla vel urna molestie lobortis a eu arcu. Ut non efficitur nisi. Nunc porttitor commodo nisi, vel venenatis lacus hendrerit vitae. Mauris est dolor, rutrum id ipsum eget, consectetur euismod risus. Nunc id ultricies velit, at volutpat sem.",
+//                    new Timestamp(System.currentTimeMillis()),
+//                    repo.findByUsername("Smith").getUserProfile()
+//            ));
+//
+//            postRepository.save(new Post("Trip in Sedona",
+//                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum molestie nisi lorem, vel pharetra lorem congue sit amet. In hac habitasse platea dictumst. Maecenas vel nulla vel urna molestie lobortis a eu arcu. Ut non efficitur nisi. Nunc porttitor commodo nisi, vel venenatis lacus hendrerit vitae. Mauris est dolor, rutrum id ipsum eget, consectetur euismod risus. Nunc id ultricies velit, at volutpat sem.",
+//                    new Timestamp(System.currentTimeMillis()),
+//                    repo.findByUsername("Toni").getUserProfile()
+//            ));
+//
+//            postRepository.findAll()
+//                    .forEach(System.out::println);
         };
     }
 

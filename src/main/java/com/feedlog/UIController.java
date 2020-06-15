@@ -6,10 +6,14 @@ import com.feedlog.domain.UserProfile;
 import com.feedlog.service.PostService;
 import com.feedlog.service.UserProfileService;
 import com.feedlog.service.UserService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.security.Principal;
 
 @Controller
 public class UIController {
@@ -35,11 +39,15 @@ public class UIController {
         Post createPost = new Post();
         post.addAttribute("createPost", createPost);
         homeModel.addAttribute("posts",postService.findAll());
-//        homeModel.addAttribute("postForProfiles",postService.findById(id);
+
+
+
         return "home";
     }
     @GetMapping("profilesPage")
     public String profiles(Model profileModel){
+
+
         profileModel.addAttribute("userProfilesHome",profileService.findAll());
         return "profilesPage";
     }
@@ -55,7 +63,7 @@ public class UIController {
     public String registerProfile(@ModelAttribute("user") User user){
         System.out.println(user);
         userService.addUser(user);
-        return "home";
+        return "registerPage";
     }
 
 
@@ -67,9 +75,15 @@ public class UIController {
     }
 
     @GetMapping("createProfile")
-    public String createProfile(Model profileModel){
+    public String createProfile(Model profileModel, Model userModel){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        userModel.addAttribute("user", authentication.getPrincipal());
+
+
         UserProfile userProfile = new UserProfile();
         profileModel.addAttribute("userProfile", userProfile);
+
+
         return "createProfile";
     }
 
@@ -80,8 +94,8 @@ public class UIController {
     }
 
 
-    @PostMapping
-    public String createPost(@ModelAttribute("post") Post post){
+    @PostMapping("home")
+    public String createPost(@ModelAttribute("createPost") Post post){
         postService.addPost(post);
         return "home";
     }
